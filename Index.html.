@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<meta name="description" content="RED SENSI PRO — Free Fire sensitivity starter settings, presets and HUD tips.">
+<title>RED SENSI PRO | AIM HIGH. HIT HARD.</title>
+<style>
+:root{--red:#ff2638;--bg:#090909;--panel:#151515;--muted:#a7a7a7;--line:#2b2b2b}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#381015 0,transparent 36%),var(--bg);color:#fff;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+.wrap{width:min(1050px,92%);margin:auto}.top{display:flex;align-items:center;justify-content:space-between;padding:20px 0;border-bottom:1px solid var(--line)}
+.brand{font-weight:950;letter-spacing:1.5px;font-size:20px}.brand span{color:var(--red)}.tag{color:var(--muted);font-size:11px;letter-spacing:2px}
+.hero{text-align:center;padding:48px 0 30px}.eyebrow{color:var(--red);font-weight:800;letter-spacing:3px;font-size:12px}.hero h1{font-size:clamp(36px,8vw,66px);line-height:1.02;margin:12px 0}.hero h1 span{color:var(--red)}.hero p{color:var(--muted);max-width:580px;margin:12px auto 22px}
+.pill{display:inline-block;border:1px solid #512027;color:#ff9aa3;border-radius:99px;padding:6px 12px;font-size:12px}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin:18px 0 34px}.card{background:linear-gradient(160deg,#191919,#101010);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 12px 35px #0005}.card h2{margin:0 0 5px;font-size:19px}.sub{color:var(--muted);font-size:13px;margin:0 0 18px}
+label{display:block;font-weight:700;font-size:13px;margin:15px 0 7px}select,input[type=text]{width:100%;padding:12px 13px;background:#0c0c0c;color:#fff;border:1px solid #393939;border-radius:10px;font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btn{border:0;border-radius:11px;padding:13px 16px;font-weight:850;cursor:pointer;font-size:14px}.primary{background:var(--red);color:white;width:100%;margin-top:17px}.secondary{background:#242424;color:white;border:1px solid #3a3a3a}.actions{display:flex;gap:10px;margin-top:16px}.actions .btn{flex:1}
+.status{background:#101010;border:1px solid var(--line);border-radius:10px;padding:11px 12px;color:#bcbcbc;font-size:12px;margin-top:12px}.status strong{color:#fff}
+.mode{display:flex;gap:8px;flex-wrap:wrap}.mode button{background:#101010;border:1px solid #393939;color:#ddd;border-radius:9px;padding:9px 13px;cursor:pointer}.mode button.active{border-color:var(--red);background:#351116;color:#fff}
+.setting{margin:17px 0}.setting-head{display:flex;justify-content:space-between;font-size:13px;font-weight:700}.setting output{color:#ff6471;font-variant-numeric:tabular-nums}input[type=range]{width:100%;accent-color:var(--red);margin-top:9px}
+.note{font-size:12px;color:var(--muted);line-height:1.55}.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:35px}.tip{background:#121212;border:1px solid var(--line);border-radius:14px;padding:16px}.tip b{display:block;margin-bottom:5px}.tip p{color:var(--muted);font-size:12px;margin:0}
+footer{border-top:1px solid var(--line);padding:22px 0 32px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.tips{grid-template-columns:1fr}.hero{padding-top:36px}.card{padding:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div><div class="brand"><span>RED</span> SENSI PRO</div><div class="tag">AIM HIGH. HIT HARD.</div></div><span class="pill">FREE FIRE SETTINGS</span></header>
+<section class="hero"><div class="eyebrow">YOUR AIM. YOUR CONTROL.</div><h1>FIND YOUR <span>SENSI.</span></h1><p>Generate a sensitivity starting point, tune it to your play style, and keep your settings ready to copy.</p></section>
+<main class="grid">
+<section class="card">
+<h2>Device setup</h2><p class="sub">We'll try to identify your device. You can always choose manually.</p>
+<div class="status" id="detect"><strong>Device detection:</strong> Checking your browser…</div>
+<div class="row">
+<div><label for="brand">Phone brand</label><select id="brand"><option value="">Choose brand</option><option>Samsung</option><option>Tecno</option><option>Infinix</option><option>Xiaomi / Redmi</option><option>iPhone</option><option>Oppo</option><option>Vivo</option><option>Realme</option><option>Huawei</option><option>Other Android</option></select></div>
+<div><label for="model">Model (optional)</label><input id="model" type="text" placeholder="e.g. Spark 10"></div>
+</div>
+<label>Play style</label><div class="mode" id="modes"><button data-mode="headshot" class="active">Headshot</button><button data-mode="balanced">Balanced</button><button data-mode="rush">Rush</button></div>
+<button class="btn primary" id="generate">GENERATE MY SENSI</button>
+<p class="note" style="margin-top:12px">Detection is browser-based and may not identify the exact phone model. Select your brand manually if needed.</p>
+</section>
+<section class="card">
+<h2>Your sensitivity</h2><p class="sub">Use these as starting values, then test and adjust in training mode.</p>
+<div id="sliders"></div>
+<div class="actions"><button class="btn primary" id="copy">COPY SETTINGS</button><button class="btn secondary" id="reset">RESET</button></div>
+<div class="status" id="message">Choose your device and play style, then generate your settings.</div>
+</section>
+</main>
+<section class="tips">
+<div class="tip"><b>⚙️ DPI guide</b><p>DPI is a phone-level setting. Change it only if you understand your device's developer settings; this website cannot change it for you.</p></div>
+<div class="tip"><b>🎮 HUD guide</b><p>Keep your fire button comfortable to reach. Adjust button size and placement gradually instead of copying every layout.</p></div>
+<div class="tip"><b>🎯 Test first</b><p>Try each setup in training mode and make small changes. No sensitivity setting can guarantee headshots.</p></div>
+</section>
+<footer>© 2026 RED SENSI PRO · Independent fan-made settings helper. Not affiliated with Garena or Free Fire.</footer>
+</div>
+<script>
+const names=["General","Red Dot","2x Scope","4x Scope","Sniper Scope","Free Look"];
+const presets={headshot:[190,185,178,170,95,150],balanced:[175,170,160,150,85,135],rush:[200,195,185,175,100,165]};
+let currentMode="headshot", values=[190,185,178,170,95,150];
+const sliders=document.getElementById("sliders");
+function render(){sliders.innerHTML="";names.forEach((name,i)=>{const wrap=document.createElement("div");wrap.className="setting";wrap.innerHTML=`<div class="setting-head"><span>${name}</span><output id="v${i}">${values[i]}</output></div><input aria-label="${name} sensitivity" type="range" min="0" max="200" value="${values[i]}" id="s${i}">`;sliders.appendChild(wrap);wrap.querySelector("input").addEventListener("input",e=>{values[i]=+e.target.value;document.getElementById("v"+i).textContent=values[i]})})}
+function detect(){const ua=navigator.userAgent.toLowerCase();let brand="";if(/iphone|ipad/.test(ua))brand="iPhone";else if(ua.includes("samsung"))brand="Samsung";else if(ua.includes("tecno"))brand="Tecno";else if(ua.includes("infinix"))brand="Infinix";else if(/redmi|xiaomi|poco/.test(ua))brand="Xiaomi / Redmi";else if(ua.includes("oppo"))brand="Oppo";else if(ua.includes("vivo"))brand="Vivo";else if(ua.includes("realme"))brand="Realme";else if(ua.includes("huawei"))brand="Huawei";else if(/android/.test(ua))brand="Other Android";if(brand)document.getElementById("brand").value=brand;document.getElementById("detect").innerHTML=`<strong>Device detection:</strong> ${brand||"Brand not detected"} · ${/android/.test(ua)?"Android":/iphone|ipad/.test(ua)?"iOS":"Unknown platform"}`}
+document.getElementById("modes").addEventListener("click",e=>{if(e.target.dataset.mode){currentMode=e.target.dataset.mode;document.querySelectorAll("#modes button").forEach(b=>b.classList.toggle("active",b===e.target))}});
+document.getElementById("generate").addEventListener("click",()=>{values=[...presets[currentMode]];render();document.getElementById("message").textContent=`${currentMode[0].toUpperCase()+currentMode.slice(1)} preset generated. Test it and fine-tune for your device.`});
+document.getElementById("copy").addEventListener("click",async()=>{const text=`RED SENSI PRO — ${currentMode.toUpperCase()}\nPhone: ${document.getElementById("brand").value||"Not selected"} ${document.getElementById("model").value}\n`+names.map((n,i)=>`${n}: ${values[i]}`).join("\n");try{await navigator.clipboard.writeText(text);document.getElementById("message").textContent="Settings copied to clipboard."}catch(e){document.getElementById("message").textContent=text}});
+document.getElementById("reset").addEventListener("click",()=>{values=[100,100,100,100,100,100];render();document.getElementById("message").textContent="Sensitivity values reset to 100."});
+detect();render();
+</script>
+</body>
+</html>
